@@ -15,7 +15,7 @@ module.exports = {
   },
   optimization: {
     runtimeChunk: false
-  },   
+  },
   resolve: {
     alias: {
       ...sharedMappings.getAliases(),
@@ -26,30 +26,30 @@ module.exports = {
   },
   plugins: [
     new ModuleFederationPlugin({
-        library: { type: "module" },
+      library: { type: "module" },
 
-        // For remotes (please adjust)
-        // name: "shell",
-        // filename: "remoteEntry.js",
-        // exposes: {
-        //     './Component': './projects/shell/src/app/app.component.ts',
-        // },        
-        
-        // For hosts (please adjust)
-        // remotes: {
-        //     "mfeRemoteApp": "http://localhost:4200/remoteEntry.js",
+      // For remotes (please adjust)
+      // name: "shell",
+      // filename: "remoteEntry.js",
+      // exposes: {
+      //     './Component': './projects/shell/src/app/app.component.ts',
+      // },        
 
-        // },
+      // For hosts (please adjust)
+      remotes: {
+        "mfeRemoteApp": "http://localhost:4501/remoteEntry.js",
 
-        shared: share({
-          "@angular/core": { singleton: true, strictVersion: true, requiredVersion: 'auto' }, 
-          "@angular/common": { singleton: true, strictVersion: true, requiredVersion: 'auto' }, 
-          "@angular/common/http": { singleton: true, strictVersion: true, requiredVersion: 'auto' }, 
-          "@angular/router": { singleton: true, strictVersion: true, requiredVersion: 'auto' },
+      },
 
-          ...sharedMappings.getDescriptors()
-        })
-        
+      shared: share({
+        "@angular/core": { singleton: true, strictVersion: true, requiredVersion: 'auto' },
+        "@angular/common": { singleton: true, strictVersion: true, requiredVersion: 'auto' },
+        "@angular/common/http": { singleton: true, strictVersion: true, requiredVersion: 'auto' },
+        "@angular/router": { singleton: true, strictVersion: true, requiredVersion: 'auto' },
+
+        ...sharedMappings.getDescriptors()
+      })
+
     }),
     sharedMappings.getPlugin()
   ],
